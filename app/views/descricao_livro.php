@@ -49,12 +49,14 @@ $BASE_URL = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI'
                     <p><strong><?php echo htmlspecialchars($comentario['nome_usuario']); ?></strong></p>
                     <p><?php echo htmlspecialchars($comentario['comentario']); ?></p>
                     <!-- Botão para excluir comentário (somente se for do usuário logado) -->
-                    <?php if ($_SESSION['usuario_id'] === $comentario['id_usuario']): ?>
-                        <form method="POST" action="?action=excluirComentario">
-                            <input type="hidden" name="id_livro" value="<?php echo $_GET['id']; ?>">
-                            <input type="hidden" name="id_comentario" value="<?= $comentario['id'] ?>">
-                            <button type="submit" class="btn-excluir">Excluir</button>
-                        </form>
+                    <?php if (isset($_SESSION['usuario_id'])):?>
+                        <?php if ($_SESSION['usuario_id'] === $comentario['id_usuario']): ?>
+                            <form method="POST" action="?action=excluirComentario">
+                                <input type="hidden" name="id_livro" value="<?php echo $_GET['id']; ?>">
+                                <input type="hidden" name="id_comentario" value="<?= $comentario['id'] ?>">
+                                <button type="submit" class="btn-excluir">Excluir</button>
+                            </form>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <p class="data-comentario"><?php echo date("d/m/Y H:i", strtotime($comentario['data_comentario'])); ?></p>
                 </div>

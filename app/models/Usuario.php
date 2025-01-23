@@ -46,12 +46,6 @@ class Usuario {
             // Verifica se o usuário foi encontrado
             if ($stmt->rowCount() > 0) {
                 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-                
-                if(is_string($senha) == is_string($usuario['senha'])){
-                    print_r(password_verify($senha, $usuario['senha']));
-                } else {
-                    echo is_string($senha) . " " . is_string($usuario['senha']);
-                }
 
                 // Verifica se a senha está correta
                 if (password_verify($senha, $usuario['senha'])) {
