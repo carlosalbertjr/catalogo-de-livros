@@ -74,7 +74,7 @@ class Livro {
     }
     
     public function buscarComentariosPorLivroId($idLivro) {
-        $sql = "SELECT c.comentario, c.data_comentario, u.nome_usuario AS nome_usuario 
+        $sql = "SELECT c.id,    c.comentario, c.data_comentario, c.id_usuario, u.nome_usuario AS nome_usuario 
                 FROM comentarios c
                 INNER JOIN usuarios u ON c.id_usuario = u.id
                 WHERE c.id_livro = ?
@@ -85,5 +85,18 @@ class Livro {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function verificarProprietarioComentario($idComentario, $idUsuario) {
+        $sql = "SELECT id FROM comentarios WHERE id = ? AND id_usuario = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$idComentario, $idUsuario]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
+    }
+    
+    public function excluirComentario($idComentario) {
+        $sql = "DELETE FROM comentarios WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([$idComentario]);
+    }
+  
 }
 ?>

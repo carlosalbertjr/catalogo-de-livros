@@ -6,7 +6,7 @@ class UsuarioController {
 
     // Método para exibir o formulário de cadastro
     public function exibirFormularioCadastro() {
-        require_once __DIR__ . '/../views/cadastrar_usuario.php';
+        require_once __DIR__ . '//..//app/views/cadastrar_usuario.php';
     }
 
     // Método para cadastrar o usuário
@@ -34,8 +34,8 @@ class UsuarioController {
 
             // Criar um novo objeto de usuário
             $usuario = new Usuario();
-            if ($usuario->cadastrar($nome_usuario, $login, $senha_hash, $email)) {
-                echo "Usuário cadastrado com sucesso!";
+            if ($usuario->cadastrarUsuario($nome_usuario, $login, $senha_hash, $email)) {
+                header("Location: login.php");
             } else {
                 echo "Erro ao cadastrar usuário!";
             }

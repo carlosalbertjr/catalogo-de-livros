@@ -496,3 +496,88 @@ h1 {
     color: #333;
     margin-top: 20px;
 }
+
+.btn-excluir {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-excluir:hover {
+    background-color: #c0392b;
+}
+
+/* Formulário de cadastro */
+.form-cadastro-usuario {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+/* Estilo das labels */
+.form-label {
+    font-size: 14px;
+    color: #333333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Estilo dos inputs */
+.form-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Foco nos inputs */
+.form-input:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Botão de cadastro */
+.form-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Efeito hover no botão */
+.form-button:hover {
+    background-color: #0056b3;
+}
+
+/* Texto do rodapé */
+.form-footer-text {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Link de login */
+.form-link {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.form-link:hover {
+    text-decoration: underline;
+}

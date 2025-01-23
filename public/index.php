@@ -25,6 +25,9 @@ if (isset($_GET['action'])) {
     } elseif ($action == 'form-cadastrar') {
         $livroController->exibirFormularioCadastro();
     
+    }elseif ($action == 'cadastrar-usuario') {
+        $usuarioController->cadastrarUsuario();
+        
     } elseif ($action == 'sair') {
         // Encerra a sessão e redireciona para a página de login
         session_destroy();
@@ -66,6 +69,9 @@ if (isset($_GET['action'])) {
     
     } elseif ($action == 'comentar') {
         $livroController->comentar();
+    
+    } elseif ($action == 'excluirComentario') {
+        $livroController->excluirComentario();
     }
     
     

@@ -45,7 +45,7 @@ $BASE_URL = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI'
 
                 <input type="submit" value="Entrar">
             </form>
-            <p>Não tem uma conta? <a href="cadastrar_usuario.php">Cadastre-se</a></p>
+            <p>Não tem uma conta? <a href="../app/views/cadastrar_usuario.php">Cadastre-se</a></p>
         </div>
     </div>
 </body>

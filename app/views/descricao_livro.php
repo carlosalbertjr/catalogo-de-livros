@@ -25,7 +25,8 @@ $BASE_URL = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI'
             <p><?php echo nl2br(htmlspecialchars($detalhesLivro['resumo'])); ?></p>
         </div>
     </div>
-    <!- Trecho para Adicionar Comentários no Livro ->
+    
+    <!-- Trecho para Adicionar Comentários no Livro -->
     <?php if (isset($_SESSION['usuario_id'])): ?>
         <div class="adicionar-comentario">
             <h3>Adicionar Comentário</h3>
@@ -38,7 +39,8 @@ $BASE_URL = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI'
     <?php else: ?>
         <p class="login-mensagem">Faça login para adicionar um comentário.</p>
     <?php endif; ?>
-
+    
+    <!-- Trecho para Exibir comentarios -->
     <h3>Comentários</h3>
     <div class="lista-comentarios">
         <?php if (!empty($comentarios)): ?>
@@ -46,6 +48,14 @@ $BASE_URL = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI'
                 <div class="comentario">
                     <p><strong><?php echo htmlspecialchars($comentario['nome_usuario']); ?></strong></p>
                     <p><?php echo htmlspecialchars($comentario['comentario']); ?></p>
+                    <!-- Botão para excluir comentário (somente se for do usuário logado) -->
+                    <?php if ($_SESSION['usuario_id'] === $comentario['id_usuario']): ?>
+                        <form method="POST" action="?action=excluirComentario">
+                            <input type="hidden" name="id_livro" value="<?php echo $_GET['id']; ?>">
+                            <input type="hidden" name="id_comentario" value="<?= $comentario['id'] ?>">
+                            <button type="submit" class="btn-excluir">Excluir</button>
+                        </form>
+                    <?php endif; ?>
                     <p class="data-comentario"><?php echo date("d/m/Y H:i", strtotime($comentario['data_comentario'])); ?></p>
                 </div>
             <?php endforeach; ?>

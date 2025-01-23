@@ -205,5 +205,35 @@ class LivroController {
         }
     }
     
+    public function excluirComentario() {
+        if (!isset($_SESSION['usuario_id'])) {
+            header('Location: ?action=login');
+            exit;
+        }
+    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_comentario'])) {
+            $idComentario = $_POST['id_comentario'];
+            $idUsuario = $_SESSION['usuario_id'];
+            $idLivro = $_POST['id_livro'];
+    
+            $livroModel = new Livro();
+    
+            // Verificar se o comentário pertence ao usuário logado
+            if ($livroModel->verificarProprietarioComentario($idComentario, $idUsuario)) {
+                if ($livroModel->excluirComentario($idComentario)) {
+                    header("Location: ?action=descricao&id=$idLivro");
+                    exit;
+                }
+            } else {
+                echo "Você não tem permissão para excluir este comentário.";
+                header("Location: ?action=descricao&id=$idLivro");
+                exit;
+            }
+        }
+    
+        header("Location: ?action=descricaoLivro&id=" . $_GET['id']);
+        exit;
+    }
+    
 }
 ?>
