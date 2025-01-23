@@ -169,7 +169,8 @@ class LivroController {
     
         // Buscar detalhes do livro pelo ID
         $detalhesLivro = $livroModel->buscarLivroPorId($id);
-    
+        $comentarios = $livroModel->buscarComentariosPorLivroId($id);
+        
         // Verificar se o livro foi encontrado
         if (!$detalhesLivro) {
             echo "Livro não encontrado.";
@@ -179,6 +180,30 @@ class LivroController {
         // Carregar a view de descrição do livro
         require_once __DIR__ . '/../views/descricao_livro.php';
     }
-        
+    
+    public function comentar() {
+    
+        if (!isset($_SESSION['usuario_id'])) {
+            header('Location: ?action=login');
+            exit;
+        }
+    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $idLivro = $_POST['id_livro'];
+            $comentario = $_POST['comentario'];
+            $idUsuario = $_SESSION['usuario_id'];
+    
+            if (!empty($comentario)) {
+                $livroModel = new Livro();
+                if ($livroModel->adicionarComentario($idLivro, $idUsuario, $comentario)) {
+                    header("Location: ?action=descricao&id=$idLivro");
+                    exit;
+                } else {
+                    echo "Erro ao salvar o comentário.";
+                }
+            }
+        }
+    }
+    
 }
 ?>

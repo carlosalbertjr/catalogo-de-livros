@@ -41,14 +41,6 @@ class Livro {
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    public function buscarComentariosPorLivroId($id) {
-        $sql = "SELECT * FROM comentarios WHERE livro_id = :id ORDER BY data DESC";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
 
     public function adicionarFavorito($idUsuario, $idLivro, $dataAdicionado) {
         $query = "INSERT INTO favoritos (id_usuario, id_livro, data_adicionado) VALUES (:id_usuario, :id_livro, :data_adicionado)";
@@ -72,6 +64,25 @@ class Livro {
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    public function adicionarComentario($idLivro, $idUsuario, $comentario) {
+        $sql = "INSERT INTO comentarios (id_livro, id_usuario, comentario, data_comentario) VALUES (?, ?, ?, NOW())";
+        $stmt = $this->conn->prepare($sql);
+    
+        return $stmt->execute([$idLivro, $idUsuario, $comentario]);
+    }
+    
+    public function buscarComentariosPorLivroId($idLivro) {
+        $sql = "SELECT c.comentario, c.data_comentario, u.nome_usuario AS nome_usuario 
+                FROM comentarios c
+                INNER JOIN usuarios u ON c.id_usuario = u.id
+                WHERE c.id_livro = ?
+                ORDER BY c.data_comentario DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$idLivro]);
+    
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
 }

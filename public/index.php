@@ -17,18 +17,23 @@ if (isset($_GET['action'])) {
     
     if ($action == 'cadastrar') {
         $livroController->cadastrarLivro();  // Processar o cadastro do livro
+    
     } elseif ($action == 'listar') {
         $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
         $livroController->listarLivros($pagina);  // Listar livros
+    
     } elseif ($action == 'form-cadastrar') {
         $livroController->exibirFormularioCadastro();
+    
     } elseif ($action == 'sair') {
         // Encerra a sessão e redireciona para a página de login
         session_destroy();
         header('Location: login.php');
         exit();
+    
     } elseif ($action == 'adicionar_favorito') {
         $livroController->adicionarFavorito();
+    
     } elseif ($action == 'usuario') {
         if (isset($_SESSION['usuario_id'])){
             $usuarioController->exibirUsuario();
@@ -36,6 +41,7 @@ if (isset($_GET['action'])) {
             header('Location: login.php');
             exit();
         }
+    
     }elseif ($action == 'removerFavorito') {
         if (isset($_POST['id_livro'])) {
             $usuarioId = $_SESSION['usuario_id'];
@@ -57,6 +63,9 @@ if (isset($_GET['action'])) {
     } elseif ($action == 'descricao') {
         $livroId = isset($_GET['id']) ? intval($_GET['id']) : 0;
         $livroController->exibirDescricaoLivro($livroId);
+    
+    } elseif ($action == 'comentar') {
+        $livroController->comentar();
     }
     
     
@@ -66,5 +75,5 @@ if (isset($_GET['action'])) {
     header('Location: index.php?action=listar');
     //$livroController->exibirFormularioCadastro();
 }
-// testado meu primeiro commit
+
 ?>
