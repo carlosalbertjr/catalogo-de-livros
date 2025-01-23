@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-visualização da Imagem</title>
+</head>
+<body>
+    <form>
+        <label for="imagem_capa">Imagem de Capa:</label>
+        <input type="file" name="imagem_capa" id="imagem_capa" accept=".jpg, .png" required><br>
+        <img id="preview" src="#" alt="Pré-visualização da imagem" style="display:none; max-width:200px; margin-top:10px;">
+    </form>
+
+    <script>
+        const inputFile = document.getElementById('imagem_capa');
+        const preview = document.getElementById('preview');
+
+        inputFile.addEventListener('change', function() {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file); // Lê o arquivo como URL
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
