@@ -22,7 +22,7 @@ class Usuario {
 
         // Inserir o usuário no banco de dados
         $stmt = $this->pdo->prepare("INSERT INTO usuarios (nome_usuario, login, senha, email) VALUES (?, ?, ?, ?)");
-        return $stmt->execute([$nome_usuario, $login, password_hash($senha, PASSWORD_DEFAULT), $email]);
+        return $stmt->execute([$nome_usuario, $login, $senha, $email]);
     }
 
     public function usuarioExistente($login) {

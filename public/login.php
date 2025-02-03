@@ -8,7 +8,7 @@ require_once __DIR__ . '//..//app/models/Usuario.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuario = $_POST['usuario'];
-    $senha = strval($_POST['senha']);
+    $senha = $_POST['senha'];
 
     // Verificar credenciais
     $usuarioModel = new Usuario();
