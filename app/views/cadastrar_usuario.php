@@ -27,8 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-
-$BASE_URL = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']. '?') . '/';
 ?>
 <head>
     <link rel="stylesheet" href="../../public/assets/styles.css">

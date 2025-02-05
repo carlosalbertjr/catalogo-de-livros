@@ -1,13 +1,9 @@
-<?php
-$BASE_URL = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']. '?') . '/';
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php $BASE_URL ?>assets/styles.css">
+    <link rel="stylesheet" href="<?php __DIR__ ?>assets/styles.css">
     <title>Editar Usuário</title>
 </head>
 <?php require_once 'header.php'; ?>

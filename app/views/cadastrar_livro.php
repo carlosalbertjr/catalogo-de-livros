@@ -4,9 +4,6 @@ if (!isset($_SESSION['usuario_id'])) {
     header('Location: login.php');
     exit;
 }
-
-// Caso o usuário esteja logado, continue com o restante da lógica da página
-$BASE_URL = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']. '?') . '/';
 ?>
 
 <!DOCTYPE html>
@@ -15,14 +12,14 @@ $BASE_URL = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI'
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Livro</title>
-    <link rel="stylesheet" href="<?php echo $BASE_URL ?>assets/styles.css">
+    <link rel="stylesheet" href="<?php __DIR__ ?>assets/styles.css">
     
 </head>
 <body>
 <?php require_once 'header.php'; ?>
 <div class="container-cadastro-livro">
     <h1>Cadastro de Livro</h1>
-    <form class="formulario-cadastro" action="<?php echo $BASE_URL . 'index.php?action=cadastrar' ?>" method="POST" enctype="multipart/form-data">
+    <form class="formulario-cadastro" action="index.php?action=cadastrar" method="POST" enctype="multipart/form-data">
         <div class="avisos">
             <!-- Aqui você pode mostrar mensagens de erro -->
         </div>    

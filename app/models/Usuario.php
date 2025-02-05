@@ -4,16 +4,16 @@ require_once 'Database.php';
 
 class Usuario {
 
-    private $pdo;
+    private $conn;
 
     public function __construct() {
         $database = new Database();
-        $this->pdo = $database->getConnection();
+        $this->conn = $database->getConnection();
     }
 
     public function cadastrarUsuario($nome_usuario, $login, $senha, $email) {
         // Verificar se o login já está em uso
-        $stmt = $this->pdo->prepare("SELECT * FROM usuarios WHERE login = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM usuarios WHERE login = ?");
         $stmt->execute([$login]);
         if ($stmt->rowCount() > 0) {
             echo "O login já está em uso!";
@@ -21,13 +21,14 @@ class Usuario {
         }
 
         // Inserir o usuário no banco de dados
-        $stmt = $this->pdo->prepare("INSERT INTO usuarios (nome_usuario, login, senha, email) VALUES (?, ?, ?, ?)");
+        $stmt = $this->conn->prepare(
+            "INSERT INTO usuarios (nome_usuario, login, senha, email) VALUES (?, ?, ?, ?)");
         return $stmt->execute([$nome_usuario, $login, $senha, $email]);
     }
 
     public function usuarioExistente($login) {
         try {
-            $stmt = $this->pdo->prepare("SELECT id FROM usuarios WHERE login = ?");
+            $stmt = $this->conn->prepare("SELECT id FROM usuarios WHERE login = ?");
             $stmt->execute([$login]);
     
             // Retorna true se o login já existir no banco de dados, caso contrário, false
@@ -40,7 +41,7 @@ class Usuario {
     public function login($login, $senha) {
         try {
             // Consulta para buscar o usuário pelo login
-            $stmt = $this->pdo->prepare("SELECT * FROM usuarios WHERE login = ?");
+            $stmt = $this->conn->prepare("SELECT * FROM usuarios WHERE login = ?");
             $stmt->execute([$login]);
     
             // Verifica se o usuário foi encontrado
@@ -65,7 +66,7 @@ class Usuario {
     }    
     
     public function buscarPorId($usuarioId) {
-        $stmt = $this->pdo->prepare("SELECT id, nome_usuario, login, email FROM usuarios WHERE id = ? ");
+        $stmt = $this->conn->prepare("SELECT id, nome_usuario, login, email FROM usuarios WHERE id = ? ");
         $stmt->execute([$usuarioId]);
 
         if ($stmt->rowCount() > 0) {
@@ -87,7 +88,7 @@ class Usuario {
         $sql .= " WHERE id = ?";
         $params[] = $id;
     
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         return $stmt->execute($params);
     }
     
@@ -105,7 +106,7 @@ class Usuario {
         $sql .= " WHERE id = ?";
         $params[] = $id;
         echo $sql;
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         return $stmt->execute($params);
     }
     

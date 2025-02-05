@@ -1,15 +1,10 @@
-<?php
-$BASE_URL = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']. '?') . '/';
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Livro</title>
-    <link rel="stylesheet" href="<?php echo $BASE_URL ?>assets/styles.css">
-    
+    <link rel="stylesheet" href="<?php __DIR__ ?>assets/styles.css">
 </head>
 <?php require_once 'header.php'; ?>
 <div class="container-usuario">
