@@ -1,7 +1,6 @@
 <?php
 session_start();
 // Configurações
-include_once("../helpers/url.php");
 require_once '../config/config.php';
 require_once '../app/controllers/LivroController.php';
 require_once '../app/controllers/UsuarioController.php';
